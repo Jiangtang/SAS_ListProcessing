@@ -1,0 +1,17 @@
+* http://www.sascommunity.org/wiki/Tips:Check_if_a_variable_exists_in_a_dataset;
+
+%macro VarExist(ds,var);
+  %local rc dsid result;
+  %let dsid=%sysfunc(open(&ds));
+  %if %sysfunc(varnum(&dsid,&var)) > 0 %then %do;
+    %let result=1;
+  %end;
+  %else %do;
+    %let result=0;
+  %end;
+  %let rc=%sysfunc(close(&dsid));
+  &result
+%mend VarExist;
+
+/* Usage */
+%put %VarExist(sashelp.class,name);
