@@ -18,18 +18,52 @@ examples:
    %put %range(from=2,to=10,step=3,osep=%str(,));
    %put %range(from=2,to=10,step=3,osep=%str(,),osuf=%str(a));
 
+   data a1;
+	 a1=1;
+   run;
+
+   data a2;
+	 a2=2;
+   run;
+
+   data a3;
+	 a3=3;
+   run;
+
+   %macro doit;
+	   %let n=3;
+	   data combine1;
+		 set %do i=1 %to &n; a&i %end; ;
+	   run;
+   %mend;
+   %doit
+  
+   %macro doit;
+	   data combine2;
+		 set %range(to=3,opre=%str(a));
+	   run;
+   %mend;
+   %doit
+
+	%macro doit;
+		proc sql;                  
+		  create table combine3 as    
+		    select *      
+		    from %range(to=3,osep=%str(,),opre=%str(a));
+		quit;  
+		%mend;
+    %doit
+
 Credit:
     source code from Ian Whitlock, Names, Names, Names - Make Me a List
                (SGF 2007)   http://www2.sas.com/proceedings/forum2007/052-2007.pdf
                (SESUG 2008) http://analytics.ncsu.edu/sesug/2008/SBC-128.pdf
     This snippet used a more efficient style from Chang Chung(http://changchung.com)
     Jiangtang Hu (2013, http://www.jiangtanghu.com):
-        1)used %let rg_i = ; to initiate the macro variable rather than %local rg_i;
-        2)added two parameters (prefix/suffix) so it works more than generating sequence of integers
-        3)archived in https://github.com/Jiangtang/Programming-SAS/tree/master/ListProcessing
+        1)added two parameters (prefix/suffix) so it works more than generating sequence of integers
 */
 
- %let rg_i = ;
+ %local rg_i ;
  %do rg_i = &from %to &to %by &step ;
      %if &rg_i = &from %then
      %do;&opre.&rg_i.&osuf%end ;

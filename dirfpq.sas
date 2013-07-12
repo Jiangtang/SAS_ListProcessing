@@ -15,7 +15,7 @@
 / Usage     : %let dirlist=%dirfpq(C:\utilmacros);     %*- NO GOOD -;
 /             %let dirlist=%dirfpq(C:\utilmacros\*);      %*- GOOD -;
 /             %let dirlist=%dirfpq(C:\utilmacros\*.sas);  %*- GOOD -;
-/             %put %dirfpq(a:\test\*.gif);
+/             %put %dirfpq(d:\test\*.gif);
 /===============================================================================
 / PARAMETERS:
 /-------name------- -------------------------description------------------------

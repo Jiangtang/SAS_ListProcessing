@@ -1,9 +1,10 @@
 
 /*
+examples:
 %put %range_non_int(start = 1 , end = 5 , by = .25 ) ;
 
-http://support.sas.com/kb/37/536.html
-modified by Jiangtang Hu (jiangtanghu.com)
+Source: http://support.sas.com/kb/37/536.html
+Modified by Jiangtang Hu (2013, http://www.jiangtanghu.com)
 
 */
 

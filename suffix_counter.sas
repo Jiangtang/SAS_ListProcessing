@@ -11,11 +11,11 @@
 
     Examples: 
         %put  %suffix_counter(v, 4);
-                    produces the text v1 v2 v3 v4
+                    *produces the text v1 v2 v3 v4;
         %put %suffix_counter(v, 14, start=10);
-                    produces the text v10 v11 v12 v13 v14
+                    *produces the text v10 v11 v12 v13 v14;
         %put  %suffix_counter(v, 4, zpad=2);
-                    produces the text v01 v02 v03 v04
+                    *produces the text v01 v02 v03 v04;
 
     Credit:
         source code from Robert J. Morris, Text Utility Macros for Manipulating Lists of Variable Names

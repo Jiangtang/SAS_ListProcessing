@@ -13,7 +13,7 @@
 /             which will correctly handle file names containing spaces.
 / Usage     : %let dirlist=%dir(C:\utilmacros);
 /             %let dirlist=%dir(C:\utilmacros\*.sas);
-/             %put dirlist=%dir(a:\test);
+/             %put dirlist=%dir(d:\test);
 /===============================================================================
 / PARAMETERS:
 /-------name------- -------------------------description------------------------
