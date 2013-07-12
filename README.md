@@ -2,7 +2,7 @@
 
 ##### Author:  see individual macros
 ##### Collector:  Jiangtang Hu ([www.Jiangtanghu.com](http://www.Jiangtanghu.com))
-##### Archived:  https://github.com/Jiangtang/Programming-SAS/tree/master/ListProcessing
+##### Archived:  https://github.com/Jiangtang/SAS_ListProcessing/
 
 ## List Creating
  
