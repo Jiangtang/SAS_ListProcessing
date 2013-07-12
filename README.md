@@ -1,4 +1,4 @@
-ho# SAS List Processing Utility Macros 
+# SAS List Processing Utility Macros 
 
 ##### Author:  see individual macros
 ##### Collector:  Jiangtang Hu ([www.Jiangtanghu.com](http://www.Jiangtanghu.com))
