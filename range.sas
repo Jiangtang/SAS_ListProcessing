@@ -30,6 +30,10 @@ examples:
 	 a3=3;
    run;
 
+	 data combine0;
+	 	set a1-a3;
+	run;
+
    %macro doit;
 	   %let n=3;
 	   data combine1;
@@ -53,6 +57,15 @@ examples:
 		quit;  
 		%mend;
     %doit
+
+
+	 %macro _list(n,pre=ds);
+    %if &n=1 %then &pre.1;
+     %else %_list(%eval(&n-1)),&pre.&n;
+%mend _list;
+
+%put %_list(10); 
+
 
 Credit:
     source code from Ian Whitlock, Names, Names, Names - Make Me a List

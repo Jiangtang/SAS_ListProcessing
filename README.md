@@ -1,6 +1,6 @@
 # SAS List Processing Utility Macros 
 
-##### Author:  see individual macros
+##### Authors:  see individual macros
 ##### Collector:  Jiangtang Hu ([www.Jiangtanghu.com](http://www.Jiangtanghu.com))
 ##### Archived:  https://github.com/Jiangtang/SAS_ListProcessing/
 
@@ -25,7 +25,7 @@
 
 * %capmac:  capitalise the first letter of each  word in a macro string
 
-## quoting
+## Quoting
  
 * %qt:        add quotes to each element in a list
 * %quotelst:  quote the elements of a list
