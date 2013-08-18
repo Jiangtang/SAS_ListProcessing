@@ -14,7 +14,7 @@
 
 * %qreadpipe: read the output of a system command
 * %dir:       return a list of members of a directory
-* %dirfpq:    return a list of full-path quoted members of a directory
+* %dirfpq:    return a list of full-path quoted of  members of a directory
 
 ## List Formating
 
