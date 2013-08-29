@@ -556,6 +556,22 @@ Credits:
 %mend getVar ;
 
 
+
+/*
+%put %get_label(sashelp.iris,SepalLength);
+*/
+
+%macro get_label(data,variable);
+	%local label;  
+   	%let dsid = %sysfunc(open(&data));
+  	%if &dsid %then %do;
+         %let label=%sysfunc(varlabel(&dsid,%sysfunc(varnum(&dsid,&variable))));
+         %let rc = %sysfunc(close(&dsid));		
+   	%end;
+    &label;
+%mend;  
+
+
 /*<pre><b>
 / Program   : match.sas
 / Version   : 2.0
@@ -652,6 +668,148 @@ Credits:
   %exit: %put &err: (match) Leaving macro due to problem(s) listed.;
   %skip:
 %mend match;
+
+/*http://listserv.uga.edu/cgi-bin/wa?A2=ind9907C&L=sas-l&P=R1337
+Dorfman:
+
+%LET LIST =
+SG FJLKDSN GEWO OPITHUI GJSERO TNJEOWIJ TW9345Y TWES SDJGJSRL NWOITJN RET
+POTREPOR _5TWT WPST NWP4 T924YW P9YTP9W4 NT599P DLKFGBLK SDGSGIW A AEG AEF ZG
+EGH A G HA HESH AIT4Y8W3 HAW T83PTQ3Y O OYTP53YT PQYP8Y3Q SSLKGH SLIEUH AERH
+DQLUEIUR SL SLSHIH4 AEK AH5WO TA AEH EU DJGLKDJ ERHISHKL QLR UHER GHSLHLSH
+RBGHSD SLH SKEHRT RSKIEHB Q87O3WSL B SDKLQI WPE WEGIUQ HIHQPIG H QPGKLXK ZLQA
+HQP GTHQPG Z AOIRPH PGT3Q PGHSE QAPUR HPQYPQ A XC N SLKG PZEAF RQIUH RS H
+T38753QO SL KG OW7TY OQ HSL QP YOQ287 _W7 TOQR TL DSLSD YSIUYG RISWYG VQ369R4
+ORA47Q3 Y94 Z Q374R R462QTQ;
+
+
+
+%put %MLSORT2 (SORTIN=&LIST,SEQ=A,NODUP=N);
+%put  %MLSORT2 (SORTIN=&LIST,SEQ=D,NODUP=N);
+%put %MLSORT2 (SORTIN=&LIST,SEQ=A,NODUP=Y);
+%put  %MLSORT2 (SORTIN=&LIST,SEQ=D,NODUP=Y);
+*/
+
+
+%MACRO MLSORT2 (SORTIN=,SEQ=A,NODUP=N,MSG=Y,LEN=8);
+   %LOCAL COLL D DGT N POS PREVW SORTWK W;
+   %IF &SEQ EQ A
+      %THEN %LET COLL = *0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_;
+      %ELSE %LET COLL = *_ZYXWVUTSRQPONMLKJIHGFEDCBA9876543210;
+
+
+   %DO N=1 %TO 38; %LOCAL P&N; %END;
+
+
+   %DO POS=&LEN %TO 1 %BY -1;
+      %LET N = 1;
+      %LET W = %SCAN(&SORTIN,1);
+      %DO %WHILE (&W NE);
+         %LET DGT = %INDEX (&COLL,%SUBSTR(&W*******,&POS,1));
+         %LET P&DGT = &&P&DGT &W;
+         %LET N = %EVAL(&N+1);
+         %LET W = %SCAN(&SORTIN,&N);
+      %END;
+      %LET SORTIN =;
+      %DO J=1 %TO 38;
+         %LET SORTIN = &SORTIN &&P&J;
+         %LET P&J = ;
+      %END;
+   %END;
+
+
+   %LET N = %EVAL(&N-1);
+   %LET D = 0;
+   %LET PREVW =;
+
+
+   %IF &NODUP NE N %THEN %DO J=1 %TO &N;
+       %LET W = %SCAN(&SORTIN,&J);
+       %IF &W NE &PREVW %THEN %LET SORTWK = &SORTWK &W;
+       %ELSE %LET D = %EVAL(&D+1);
+       %LET PREVW = &W;
+   %END;
+
+
+
+
+   %IF &NODUP NE N %THEN &SORTWK;
+   %ELSE                 &SORTIN;
+%MEND MLSORT2;
+
+
+/*http://listserv.uga.edu/cgi-bin/wa?A2=ind9907C&L=sas-l&P=R1337
+
+Dorfman
+%LET LIST =
+SG FJLKDSN GEWO OPITHUI GJSERO TNJEOWIJ TW9345Y TWES SDJGJSRL NWOITJN RET
+POTREPOR _5TWT WPST NWP4 T924YW P9YTP9W4 NT599P DLKFGBLK SDGSGIW A AEG AEF ZG
+EGH A G HA HESH AIT4Y8W3 HAW T83PTQ3Y O OYTP53YT PQYP8Y3Q SSLKGH SLIEUH AERH
+DQLUEIUR SL SLSHIH4 AEK AH5WO TA AEH EU DJGLKDJ ERHISHKL QLR UHER GHSLHLSH
+RBGHSD SLH SKEHRT RSKIEHB Q87O3WSL B SDKLQI WPE WEGIUQ HIHQPIG H QPGKLXK ZLQA
+HQP GTHQPG Z AOIRPH PGT3Q PGHSE QAPUR HPQYPQ A XC N SLKG PZEAF RQIUH RS H
+T38753QO SL KG OW7TY OQ HSL QP YOQ287 _W7 TOQR TL DSLSD YSIUYG RISWYG VQ369R4
+ORA47Q3 Y94 Z Q374R R462QTQ;
+%put %MLSORT3 (SORTIN=&LIST,SEQ=A,NODUP=N);
+%put %MLSORT3 (SORTIN=&LIST,SEQ=D,NODUP=N);
+%put %MLSORT3 (SORTIN=&LIST,SEQ=A,NODUP=Y);
+%put %MLSORT3 (SORTIN=&LIST,SEQ=D,NODUP=Y);
+
+
+*/
+
+
+%MACRO MLSORT3 (SORTIN=,SEQ=A,NODUP=N,MSG=Y);
+   %LOCAL G I INV J N T;
+
+
+   %IF &SEQ EQ A %THEN %LET SEQ = G;
+   %ELSE              %LET SEQ = L;
+
+
+   %DO %UNTIL (&&W&N EQ);
+      %LET N = %EVAL(&N+1);
+      %LET W&N = %SCAN(&SORTIN,&N);
+   %END;
+   %LET N = %EVAL(&N-1);
+
+
+   %LET G = &N;
+   %DO %UNTIL (&INV AND &G=1);
+      %LET INV = 1;
+      %LET G  = %EVAL(&G*10/13);
+      %IF &G EQ 9 OR &G EQ 10 %THEN %LET G = 11;
+      %ELSE %IF &G EQ  0 %THEN %LET G =  1;
+
+
+      %DO I=1 %TO %EVAL(&N-&G);
+         %LET J = %EVAL(&I+&G);
+         %IF &&W&I &SEQ.T &&W&J %THEN %DO;
+            %LET T   = &&W&J;
+            %LET W&J = &&W&I;
+            %LET W&I = &T;
+            %LET INV = 0;
+         %END;
+      %END;
+   %END;
+
+
+   %LET SORTIN = &W1;
+   %LET T = 0;
+
+
+   %IF &NODUP NE N %THEN %DO I=2 %TO &N;
+      %LET J = %EVAL(&I-1);
+      %IF &&W&I NE &&W&J %THEN %LET SORTIN = &SORTIN &&W&I;
+      %ELSE %LET T = %EVAL(&T+1);
+   %END;
+   %ELSE %DO I=2 %TO &N;
+      %LET SORTIN = &SORTIN &&W&I;
+   %END;
+
+   &SORTIN
+%MEND MLSORT3;
+
 
 /*<pre><b>
 / Program   : nodup.sas
@@ -1308,6 +1466,10 @@ examples:
 	 a3=3;
    run;
 
+	 data combine0;
+	 	set a1-a3;
+	run;
+
    %macro doit;
 	   %let n=3;
 	   data combine1;
@@ -1331,6 +1493,15 @@ examples:
 		quit;  
 		%mend;
     %doit
+
+
+	 %macro _list(n,pre=ds);
+    %if &n=1 %then &pre.1;
+     %else %_list(%eval(&n-1)),&pre.&n;
+%mend _list;
+
+%put %_list(10); 
+
 
 Credit:
     source code from Ian Whitlock, Names, Names, Names - Make Me a List
@@ -1811,6 +1982,129 @@ Credit: Richard A. DeVenezia
 
     &VarList
 %mend slice;
+
+/*http://listserv.uga.edu/cgi-bin/wa?A2=ind0410b&L=sas-l&F=P&S=&P=25822
+
+%sortc
+
+%put ***%sorted(list=
+
+
+SG FJLKDSN GEWO OPITHUI GJSERO TNJEOWIJ TW9345Y TWES SDJGJSRL NWOITJN RET
+POTREPOR _5TWT WPST NWP4 T924YW P9YTP9W4 NT599P DLKFGBLK SDGSGIW A AEG AEF
+ZG
+EGH A G HA HESH AIT4Y8W3 HAW T83PTQ3Y O OYTP53YT PQYP8Y3Q SSLKGH SLIEUH
+AERH
+DQLUEIUR SL SLSHIH4 AEK AH5WO TA AEH EU DJGLKDJ ERHISHKL QLR UHER GHSLHLSH
+RBGHSD SLH SKEHRT RSKIEHB Q87O3WSL B SDKLQI WPE WEGIUQ HIHQPIG H QPGKLXK
+ZLQA
+HQP GTHQPG Z AOIRPH PGT3Q PGHSE QAPUR HPQYPQ A XC N SLKG PZEAF RQIUH RS H
+T38753QO SL KG OW7TY OQ HSL QP YOQ287 _W7 TOQR TL DSLSD YSIUYG RISWYG
+VQ369R4
+ORA47Q3 Y94 Z Q374R R462QTQ
+)***;
+
+
+
+*/
+
+%macro sortc_chang(list=, maxItemLen=100);
+
+  %local i item mvars;
+
+  %do %while (1);
+    %let i = %eval(&i.+1);
+    %let item = %qscan(%superq(list),&i.);
+    %let len  = %length(%superq(item));
+    %if &len.=0 %then %goto out;
+    %local SORTED_&i.;
+    %let SORTED_&i. = &item.%qsysfunc(repeat(%str( ), &maxItemLen.-&len.-1));
+    %if &i.=1 %then
+      %let mvars = SORTED_1;
+    %else
+      %let mvars = &mvars., SORTED_&i.;
+  %end;
+
+  %out:
+  %syscall sortc(&mvars.);
+
+  %local r;
+  %do i = 1 %to %eval(&i.-1);
+    %let r = &r. &&SORTED_&i..;
+  %end;
+
+  %*;&r.
+
+%mend;
+
+/*http://listserv.uga.edu/cgi-bin/wa?A2=ind0410b&L=sas-l&F=P&S=&P=16933 Roland
+
+%let listx=  bbb  nnnn eer rr rt  x x v  zz aaaaaa  gggg    j;
+
+%put  %order(&listx) ;
+*/
+
+
+%macro order(str);
+  %local swap words i list newlist scana scanb len lena lenb endpos;
+  %let list=%sysfunc(compbl(%sysfunc(trim(%sysfunc(left(&str))))));
+  %let words=%length(&list)-%length(%sysfunc(compress(&list,%str())))+1;
+  %let len=%length(&list);
+  %let swap=1;
+  %do %while(&swap);
+    %let swap=0;
+    %do i=1 %to %eval(&words-1);
+      %let scana=%scan(&list,&i,%str( ));
+      %let scanb=%scan(&list,%eval(&i+1),%str( ));
+      %let lena=%length(&scana);
+      %let lenb=%length(&scanb);
+      %if "&scana" GT "&scanb" %then %do;
+        %let swap=1;
+        %let newlist=;
+        %let pos=%index(&list,&scana &scanb);
+        %if &pos gt 1 %then %let newlist=%substr(&list,1,%eval(&pos-1));
+        %let newlist=%left(&newlist &scanb &scana);
+        %let endpos=%eval(&pos+&lena+&lenb);
+        %if &endpos LT &len 
+          %then %let newlist=%sysfunc(left(&newlist%substr(&list,%eval(&endpos+1))));
+        %let list=&newlist;
+      %end;
+    %end;
+  %end;
+  &list
+%mend;
+
+/*http://listserv.uga.edu/cgi-bin/wa?A2=ind0410b&L=sas-l&F=P&S=&P=14313
+Chang
+
+*/
+
+
+%macro sort_sql(wordlist=);
+
+/*-- quick and dirty list sort
+  usage example:
+%let sortedlist=;
+%sort(wordlist=d b c)
+%put ***&sortedlist.***;
+
+
+  works only in the open and on windows platform.
+--*/
+
+   filename in pipe "@echo &wordlist.";
+   data;
+      infile in dlm=" ";
+      input word :$32767. @@;
+   run;
+   proc sql noprint;
+      select word into :sortedlist separated by " "
+      from   _last_
+      order by word
+      ;
+   quit;
+%mend;
+
 /*<pre><b>
 / Program   : splitmac.sas
 / Version   : 1.0
