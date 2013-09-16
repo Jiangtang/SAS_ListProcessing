@@ -6,7 +6,7 @@
     );
 
     /*
-    return a sub-list sliced by a index
+    return a sub-list sliced by an index
 
     examples(all produce a c d):
        %put %slice(a b c d,1 3  4);                                   
