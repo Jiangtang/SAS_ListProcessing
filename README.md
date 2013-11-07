@@ -4,6 +4,13 @@
 ##### Collector:  Jiangtang Hu ([www.Jiangtanghu.com](http://www.Jiangtanghu.com))
 ##### Archived:  https://github.com/Jiangtang/SAS_ListProcessing/
 
+#Submit the following code to use it:
+
+```
+filename list url "https://raw.github.com/Jiangtang/SAS_ListProcessing/master/_ListProcessing";
+%inc list;
+```
+
 ## List Creating
  
 * %range:          produces a sequence like 1 2 3 or f1 f2 f3 or 1a 2a 3a
