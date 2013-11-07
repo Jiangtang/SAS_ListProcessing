@@ -75,4 +75,4 @@
 * %reverse:  Reverse a macro variable's value (use %sysfunc(reverse) since v6.12)
 
 * %MLSORT: sort a macro list
-
+* %for: for each operation 
