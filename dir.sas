@@ -27,7 +27,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: dir v1.1;
 
 %macro dir(dir);
   %unquote(%qreadpipe(dir /B %sysfunc(dequote(&dir))))

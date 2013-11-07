@@ -27,8 +27,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: remove v1.0;
-
 %macro remove(string,
               target1,
               target2,

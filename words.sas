@@ -27,7 +27,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: words v3.2;
 
 %macro words(str,delim=%str( ));
   %local i;

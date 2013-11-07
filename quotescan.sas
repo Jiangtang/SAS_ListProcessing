@@ -30,8 +30,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: quotescan v1.0;
-
 %macro quotescan(str,pos);
 
   %local i pos1 pos2 qtype tempstr count qstr;

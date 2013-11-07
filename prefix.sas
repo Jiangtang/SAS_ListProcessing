@@ -23,7 +23,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: prefix v1.0;
 
 %macro prefix(prefix,list);
   %local i bit;

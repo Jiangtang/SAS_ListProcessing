@@ -25,7 +25,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: nodup v1.0;
 
 %macro nodup(list,casesens=no);
 

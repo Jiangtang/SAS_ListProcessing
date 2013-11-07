@@ -40,7 +40,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: splitmac v1.0;
 
 %macro splitmac(str,cols,split=*);
 

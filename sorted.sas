@@ -24,7 +24,7 @@ ORA47Q3 Y94 Z Q374R R462QTQ
 
 */
 
-%macro sortc_chang(list=, maxItemLen=100);
+%macro sorted(list=, maxItemLen=100);
 
   %local i item mvars;
 

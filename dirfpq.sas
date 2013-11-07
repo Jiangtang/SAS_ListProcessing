@@ -29,7 +29,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: dirfpq v1.1;
 
 %macro dirfpq(dir);
 %unquote(%qreadpipe(echo off & for %nrstr(%f) in (%sysfunc(dequote(&dir))) do echo "%nrstr(%f)"))

@@ -33,7 +33,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: capmac v1.0;
 
 %macro capmac(string,ignore=);
 

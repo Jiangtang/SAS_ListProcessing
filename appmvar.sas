@@ -33,7 +33,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: appmvar v1.0;
 
 %macro appmvar(mvar,append,sep=%str(; ));
   %if %length(&&&mvar) and %length(&append) %then %do;

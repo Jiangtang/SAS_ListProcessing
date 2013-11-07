@@ -31,7 +31,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: qdequote v1.3;
 
 %macro qdequote(str);
   %if (%qsubstr(&str,1,1) EQ %str(%') and %qsubstr(&str,%length(&str),1) EQ %str(%'))

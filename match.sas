@@ -32,7 +32,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: match v2.0;
 
 %macro match(ref,list,nodup=yes,casesens=no,fixcase=no);
   %local err errflag list2 nref nlist i j item match refitem;

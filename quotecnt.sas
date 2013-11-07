@@ -24,8 +24,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: quotecnt v1.0;
-
 %macro quotecnt(str);
 
   %local i pos1 pos2 qtype tempstr count;

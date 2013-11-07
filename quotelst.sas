@@ -37,7 +37,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: quotelst v1.1;
 
 %macro quotelst(str,quote=%str(%"),delim=%str( ));
   %local i quotelst;

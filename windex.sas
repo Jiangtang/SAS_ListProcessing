@@ -26,7 +26,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: windex v1.1;
 
 %macro windex(str,target);
   %local i res words;

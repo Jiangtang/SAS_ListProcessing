@@ -23,7 +23,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: suffix v1.0;
 
 %macro suffix(suffix,list);
   %local i bit;

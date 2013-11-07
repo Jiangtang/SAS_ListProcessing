@@ -30,8 +30,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: qreadpipe v2.1;
-
 %macro qreadpipe(command);
   %local fname fid str rc res err;
   %let err=ERR%str(OR);

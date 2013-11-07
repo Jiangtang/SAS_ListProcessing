@@ -4,7 +4,7 @@
 ##### Collector:  Jiangtang Hu ([www.Jiangtanghu.com](http://www.Jiangtanghu.com))
 ##### Archived:  https://github.com/Jiangtang/SAS_ListProcessing/
 
-#Submit the following code to use it:
+#To avoid any dependencies, submit the following codes to use it:
 
 ```
 filename list url "https://raw.github.com/Jiangtang/SAS_ListProcessing/master/_ListProcessing";
@@ -81,5 +81,9 @@ filename list url "https://raw.github.com/Jiangtang/SAS_ListProcessing/master/_L
 
 * %reverse:  Reverse a macro variable's value (use %sysfunc(reverse) since v6.12)
 
-* %MLSORT: sort a macro list
+* %MLSORT2: sort a macro list
+* %MLSORT3: sort a macro list
+* %sorted: sort
+* %order: sort
+
 * %for: for each operation 

@@ -43,7 +43,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: editlist v1.0;
 
 %macro editlist(list,editstr);
   %local i item;

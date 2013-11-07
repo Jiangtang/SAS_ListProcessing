@@ -38,8 +38,6 @@
 / given or implied. User uses this code entirely at their own risk.
 /=============================================================================*/
 
-%put MACRO CALLED: removew v1.1;
-
 %macro removew(string,
           targetwords,
              casesens=no
